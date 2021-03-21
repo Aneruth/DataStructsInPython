@@ -1,22 +1,39 @@
-# Implement Queue using two stacks or stack
+# Implement Queue
 class Queue:
-    def __init__(self, k: int):
-      self.k = k
+    def __init__(self):
+      self.queue = []
 
-    def enQueue(self, value: int) -> bool:
+    def enQueue(self, value: int):
+        return self.queue.append(value)
+
+    def deQueue(self):
+      return f'deQueue element is {self.queue.pop(-1)}'
         
+    def Front(self):
+      return f'Front element is {self.queue[-1]}'  # Returns bottom most element present
 
-    def deQueue(self) -> bool:
-        
+    def Rear(self):
+        return f'Bottom element is {self.queue[0]}' # Returns top most element present
 
-    def Front(self) -> int:
-        
+    def isEmpty(self):
+        if self.queue is None:
+          return f"Is Queue is empty {True}"
+        return f"Is Queue is empty {False}"
 
-    def Rear(self) -> int:
-        
-
-    def isEmpty(self) -> bool:
-        
-
-    def isFull(self) -> bool:
+    def isFull(self):
+      if self.queue:
+        return f"Is Queue is full {True}"
+      return f"Is Queue is full {False}"
     
+    def display(self):
+      return self.queue
+    
+q = Queue()
+for i in range(1,15):
+  q.enQueue(i)
+print(q.deQueue())
+print(q.Front())
+print(q.Rear())
+print(q.isEmpty())
+print(q.isFull())
+print(q.display())
