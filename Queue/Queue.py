@@ -25,8 +25,14 @@ class Queue:
         return f"Is Queue is full {True}"
       return f"Is Queue is full {False}"
     
+    # Smaller numbers have high priority compared to the larger numbers.
+    def priorityQueue(self):
+      for i in self.queue:
+        if i < max(self.queue): # considering the first element to be maximum
+          return f'Priority queue value is {self.queue.pop(i)}'
+    
     def display(self):
-      return self.queue
+      return f'Actual list is {self.queue}'
     
 q = Queue()
 for i in range(1,15):
@@ -37,3 +43,4 @@ print(q.Rear())
 print(q.isEmpty())
 print(q.isFull())
 print(q.display())
+print(q.priorityQueue())
