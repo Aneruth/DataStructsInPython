@@ -44,15 +44,18 @@ class LinkedList:
         newNode.next,self.head = self.head,newNode
     
     def getFirst(self):
+        if self.size() == 0: return 'No element in list'
         # As we know the first data is head so we just returning the head of our linked list
         return self.head.data
     
     def getLast(self):
+        if self.size() == 0: return 'No element in list'
         return self.display()[-1]
 
     def fetch(self,index):
         current = self.head
         count = 0
+        if self.size() == 0: return 'No element in list'
         # traversing the node and if our count matches the index then we return the data
         while current:
             if count == index:
@@ -60,9 +63,41 @@ class LinkedList:
             count += 1
             current = current.next
         return 0
+    '''
+    Method 1 using while loop
+    def fropple(self):
+        current = self.head
+        while current and current.next:
+            if current.data != current.next.data:
+                current.data,current.next.data = current.next.data,current.data
+            current = current.next.next
+        return current.data
+    '''
 
+    def swapElement(self):
+        current = self.head
+        if self.size() == 0: return 'No element in the list'
+        for i in range(self.size()):
+            if i % 2 == 0:
+                current.data,current.next.data = current.next.data,current.data
+        return current.data
+
+    '''
+    def appendLinkedList(self,newList):
+        # Not an efficient method but it solves
+        return self.display().extend(newList)
+    '''
+    def appendList(self,newList):
+        current = self.head
+        while current != None:
+            if current.next is None:
+                for i in self.display():
+                    current.next = self.addLast(newList)
+            current = current.next
+    
     # Method to display the list
     def display(self):
+        if self.size() == 0: return 'No element in list'
         output = []
         current = self.head
         while(current):
@@ -74,12 +109,24 @@ class LinkedList:
 
 if __name__ == '__main__':
     LL = LinkedList()
-    for i in range(1,11):
+    for i in range(1,6):
         LL.insetElement(i)    
+    
+    LL2 = LinkedList() # Second Linked List
+    for j in range(6,11):
+        LL2.insetElement(j)
+
     # LL.addFirst(11)
     # print(f'Length of the linked list is: {LL.size()}')
     # print(f'First Node in linked list is: {LL.getFirst()}')
     # LL.addLast(32)
     # print(LL.fetch(4))
-    print(LL.display())
-    print(LL.getLast())
+    print(f'Linked List is: {LL.display()}')
+    # print(f'Last element is: {LL.getLast()}')
+    # LL.swapElement()
+    # print(f'Linked List after swapping is: {LL.display()}')
+    # print(f'Linked List First element after swapping is: {LL.getFirst()}')
+
+    # Append new linked list
+    LL.appendList(LL2.display())
+    print(f'Linked List after appending new list is: {LL.display()}')
