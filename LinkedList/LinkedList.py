@@ -46,6 +46,9 @@ class LinkedList:
     def getFirst(self):
         # As we know the first data is head so we just returning the head of our linked list
         return self.head.data
+    
+    def getLast(self):
+        return self.display()[-1]
 
     def fetch(self,index):
         current = self.head
@@ -60,10 +63,13 @@ class LinkedList:
 
     # Method to display the list
     def display(self):
+        output = []
         current = self.head
         while(current):
-            print(current.data)
+            output.append(current.data)
+            # print(current.data)
             current = current.next
+        return output
 
 
 if __name__ == '__main__':
@@ -74,5 +80,6 @@ if __name__ == '__main__':
     # print(f'Length of the linked list is: {LL.size()}')
     # print(f'First Node in linked list is: {LL.getFirst()}')
     # LL.addLast(32)
-    print(LL.fetch(4))
-    LL.display()
+    # print(LL.fetch(4))
+    print(LL.display())
+    print(LL.getLast())
