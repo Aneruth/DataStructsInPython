@@ -62,9 +62,10 @@ class LinkedList:
                 return current.data
             count += 1
             current = current.next
-        return 0
+        return 'List Index outbound'
+    
     '''
-    Method 1 using while loop
+    # Method 1 using while loop
     def fropple(self):
         current = self.head
         while current and current.next:
@@ -73,7 +74,7 @@ class LinkedList:
             current = current.next.next
         return current.data
     '''
-
+    
     def swapElement(self):
         current = self.head
         if self.size() == 0: return 'No element in the list'
@@ -81,20 +82,40 @@ class LinkedList:
             if i % 2 == 0:
                 current.data,current.next.data = current.next.data,current.data
         return current.data
+    
+    def appendLinkedList(self,item):
+        new_node = Node(item)
+        current = self.head
+        
+        if current is None: current = new_node
+
+        last = self.head
+        while last.next != None:
+            last = last.next
+        last.next = new_node
+        return new_node.data
 
     '''
-    def appendLinkedList(self,newList):
-        # Not an efficient method but it solves
-        return self.display().extend(newList)
+    def mergeAlternate(self, q):
+        p_curr = self.head
+        q_curr = q.head
+ 
+        # While there are available positions in p;
+        while p_curr != None and q_curr != None:
+ 
+            # Save next pointers
+            p_next = p_curr.next
+            q_next = q_curr.next
+ 
+            # make q_curr as next of p_curr
+            q_curr.next = p_next # change next pointer of q_curr
+            p_curr.next = q_curr # change next pointer of p_curr
+ 
+            # update current pointers for next iteration
+            p_curr = p_next
+            q_curr = q_next
+        q.head = q_curr
     '''
-    def appendList(self,newList):
-        current = self.head
-        while current != None:
-            if current.next is None:
-                for i in self.display():
-                    current.next = self.addLast(newList)
-            current = current.next
-    
     # Method to display the list
     def display(self):
         if self.size() == 0: return 'No element in list'
