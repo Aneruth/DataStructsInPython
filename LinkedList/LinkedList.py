@@ -1,4 +1,3 @@
-# Creating a Node
 class Node:
     def __init__(self,data=None,next=None):
         self.data = data
@@ -116,6 +115,26 @@ class LinkedList:
             q_curr = q_next
         q.head = q_curr
     '''
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current is not None:
+            nextElement = current.next
+            current.next = prev
+            prev = current
+            current = nextElement
+        self.head = prev 
+
+    def sortList(self):
+        current = self.head
+        nextElement = current.next
+        for i in range(self.size()):
+            if current.data < nextElement.data:
+                current.data,nextElement.data = nextElement.data,current.data
+        current = current.next
+        nextElement = nextElement.next
+        # return
+
     # Method to display the list
     def display(self):
         if self.size() == 0: return 'No element in list'
