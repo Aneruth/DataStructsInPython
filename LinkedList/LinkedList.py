@@ -26,11 +26,11 @@ class LinkedList:
     
     def addLast(self,data):
         new_node = Node(data)
-        # if our linked list is empty we create a new node
+        # if our nexted list is empty we create a new node
         if self.head is None:
                 self.head = new_node
                 return
-        # if our linked list is not empty we traverse and insert at last
+        # if our nexted list is not empty we traverse and insert at last
         last = self.head
         while (last.next):
             last = last.next
@@ -44,7 +44,7 @@ class LinkedList:
     
     def getFirst(self):
         if self.size() == 0: return 'No element in list'
-        # As we know the first data is head so we just returning the head of our linked list
+        # As we know the first data is head so we just returning the head of our nexted list
         return self.head.data
     
     def getLast(self):
@@ -73,6 +73,16 @@ class LinkedList:
             current = current.next.next
         return current.data
     '''
+
+    '''  Method 2 
+    def swapNodes(self):
+        cur = self.head
+        while cur and cur.next:
+            cur.data, cur.next.data = cur.next.data, cur.data
+            cur = cur.next.next
+        
+        return head
+    '''
     
     def swapElement(self):
         current = self.head
@@ -82,17 +92,16 @@ class LinkedList:
                 current.data,current.next.data = current.next.data,current.data
         return current.data
     
-    def appendLinkedList(self,item):
-        new_node = Node(item)
+    def appendLinkedList(self,newList):
         current = self.head
-        
-        if current is None: current = new_node
+        # if our head is null so we assign the head as new list
+        if current is None: current = newList
 
+        # dummy head 
         last = self.head
-        while last.next != None:
-            last = last.next
-        last.next = new_node
-        return new_node.data
+        while last.next != None: last = last.next
+        # adding the new list at last using addLast method
+        last.next = self.addLast(Node(newList))
 
     '''
     def mergeAlternate(self, q):
@@ -126,14 +135,38 @@ class LinkedList:
         self.head = prev 
 
     def sortList(self):
+        swap = 0
         current = self.head
-        nextElement = current.next
-        for i in range(self.size()):
-            if current.data < nextElement.data:
-                current.data,nextElement.data = nextElement.data,current.data
-        current = current.next
-        nextElement = nextElement.next
-        # return
+        if current != None:
+            while(1):
+                swap = 0
+                tmp = current
+                while(tmp.next != None):
+                    if tmp.data > tmp.next.data:
+                        # swap them
+                        swap += 1
+                        p = tmp.data
+                        tmp.data = tmp.next.data
+                        tmp.next.data = p
+                        tmp = tmp.next
+                    else:
+                        tmp = tmp.next
+                if swap == 0:
+                    break
+                else:
+                    continue
+            return current
+        return current
+    
+    def insertElements(self,newData):
+        current = self.head
+        # if the data not in linked list add at first
+        if newData != current.data: self.addFirst(newData)
+        while current != None:
+            if current.data == newData:
+                self.addLast(newData)
+            current = current.next
+        return self.sortList()
 
     # Method to display the list
     def display(self):
