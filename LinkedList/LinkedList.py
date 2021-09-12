@@ -1,7 +1,8 @@
 class Node:
-    def __init__(self,data=None,next=None):
+    def __init__(self,data=None,next=None,position = 0):
         self.data = data
         self.next = next
+        self.position = position
     
 class LinkedList:
     def __init__(self) -> None:
@@ -158,15 +159,33 @@ class LinkedList:
             return current
         return current
     
+    def index(self,item):
+        current = self.head
+        while current != None:
+            if current.data == item:
+                return current.position
+            current = current.next
+        # return 
+
+    def InsertNth(self, data, position):
+        start = self.head
+        if position == 0:
+            return Node(data, self.head)
+        while position > 1:
+            self.head = self.head.next
+            position -= 1
+        self.head.next = Node(data, self.head.next)
+        return start
+    
     def insertElements(self,newData):
         current = self.head
         # if the data not in linked list add at first
         if newData != current.data: self.addFirst(newData)
         while current != None:
             if current.data == newData:
-                self.addLast(newData)
+                self.InsertNth(newData,self.index(current.data)+1)
             current = current.next
-        return self.sortList()
+        # return self.sortList()
 
     # Method to display the list
     def display(self):
